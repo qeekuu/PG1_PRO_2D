@@ -7,10 +7,10 @@ class PrimitiveRenderer
 {
 public:
 	static void setWindowColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-	void draw_point(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-	void draw_rectangle(Uint8 r, Uint8 g, Uint8 b, Uint8 a, int x, int y, int width, int height);
-	void draw_triangle(Uint8 r, Uint8 g, Uint8 b, Uint8 a,int x1,int y1,int x2,int y2,int x3,int y3);
-	void draw_line(Uint8 r, Uint8 g, Uint8 b, Uint8 a, int x1, int y1, int x2, int y2);
+	void draw_point(Uint8 r, Uint8 g, Uint8 b, Uint8 a,unsigned int x, unsigned int y);
+	void draw_rectangle(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x, unsigned int y, unsigned int width, unsigned int height);
+	void draw_triangle(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int x3, unsigned int y3);
+	void draw_line(Uint8 r, Uint8 g, Uint8 b, Uint8 a,  int x1,  int y1,  int x2,  int y2);
 	static void render();
 };
 

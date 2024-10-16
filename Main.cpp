@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Engine.h"
 #include "Input.h"
+#include "Point2D.h"
 int main(int argc, char* argv[])
 {
 		Engine::getInstance()->Init();
@@ -9,8 +10,8 @@ int main(int argc, char* argv[])
 		Engine::getInstance()->update();
 		PrimitiveRenderer::setWindowColor(0, 0, 0, 255);
 
-		PrimitiveRenderer point;
-		point.draw_point(255, 0, 0, 255);
+		Point2D point;
+		point.drawPoint2D(255,0,0,255,400,300);
 
 		PrimitiveRenderer rectangle;
 		rectangle.draw_rectangle(0, 255, 0, 255, 400, 400, 100, 100);
