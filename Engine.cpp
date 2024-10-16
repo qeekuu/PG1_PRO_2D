@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include <iostream>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "Input.h"
 bool Engine::Init() 
 {

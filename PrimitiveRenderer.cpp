@@ -1,8 +1,8 @@
 #include "PrimitiveRenderer.h"
 #include <iostream>
 #include "Engine.h"
-#include <SDL.h>
-#include <SDL_rect.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
 
 void PrimitiveRenderer::setWindowColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
