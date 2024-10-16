@@ -18,6 +18,9 @@ int main(int argc, char* argv[])
 		PrimitiveRenderer triangle;
 		triangle.draw_triangle(255, 0, 0, 255, 100, 100, 200, 150, 150, 250);
 
+		PrimitiveRenderer line;
+		line.draw_line(255, 0, 0, 255, 600, 100, 700, 300);
+
 		PrimitiveRenderer::render();
 	}
 	Engine::getInstance()->close();

@@ -1,9 +1,9 @@
 #include "PrimitiveRenderer.h"
 #include <iostream>
 #include "Engine.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_rect.h>
-
+#include <SDL.h>
+#include <SDL_rect.h>
+#include <math.h>
 void PrimitiveRenderer::setWindowColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	SDL_SetRenderDrawColor(Engine::getInstance()->renderer, r, g, b, a);
@@ -39,8 +39,8 @@ void PrimitiveRenderer::draw_line(Uint8 r, Uint8 g, Uint8 b, Uint8 a, int x1, in
 	int x;
 	float dy, dx, y, m;
 
-	dy = y2 - y1;
-	dx = x2 - x1;
+	dy = abs(y2 - y1);
+	dx = abs(x2 - x1);
 	m = dy/dx;
 	y = y1;
 	for (x = x1; x <= x2; x++)
