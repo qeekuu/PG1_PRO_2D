@@ -18,6 +18,7 @@ int Point2D::getCoordinates(char sign)
 		return y;
 		break;
 	default:
+		return -1;
 		break;
 	}
 }

@@ -10,11 +10,11 @@ public:
     void update();
     bool running();
     void getWindowSize();
+    SDL_Renderer *getRenderer();
     void setWindowSize(int wiW,int wiH);
     void setWindowTitle(const char* title);
     void setRunning(bool quit);
 private:
-    friend class PrimitiveRenderer;
     static Engine* instance;
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;

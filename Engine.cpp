@@ -42,7 +42,10 @@ Engine* Engine::getInstance()
     return instance;
 }
 
-
+SDL_Renderer* Engine::getRenderer()
+{
+    return renderer;
+}
 
 bool Engine::running()
 {
