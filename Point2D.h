@@ -1,8 +1,7 @@
 #pragma once
-#include "PrimitiveRenderer.h"
 #include <iostream>
 
-class Point2D : public PrimitiveRenderer
+class Point2D
 {
 public:
 	int getCoordinates(char sign);

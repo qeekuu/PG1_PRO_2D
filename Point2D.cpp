@@ -1,5 +1,4 @@
 #include "Point2D.h"
-#include "PrimitiveRenderer.h"
 #include <iostream>
 
 Point2D::Point2D(int x, int y) : x{ x }, y{ y }

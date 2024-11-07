@@ -1,7 +1,7 @@
 #pragma once
 #include "Point2D.h"
 #include <iostream>
-class LineSegment : public PrimitiveRenderer
+class LineSegment
 {
 public:
 	LineSegment(int x, int y, int x2, int y2);
