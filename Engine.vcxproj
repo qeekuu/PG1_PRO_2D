@@ -130,19 +130,37 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point2D.cpp" />
+    <ClCompile Include="Polygon.cpp" />
     <ClCompile Include="PrimitiveRenderer.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="ShapeObject.cpp" />
+    <ClCompile Include="TransformableObject.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="UpdatableObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="Point2D.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="PrimitiveRenderer.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="ShapeObject.h" />
+    <ClInclude Include="TransformableObject.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="UpdatableObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

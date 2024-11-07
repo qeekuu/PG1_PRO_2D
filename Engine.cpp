@@ -65,7 +65,15 @@ void Engine::update()
     Input::getInstances()->listen();
     if (Input::getInstances()->getKey(SDL_SCANCODE_G))
     {
+        std::cout << "Klawisz G \n";
+    }
+    if (Input::getInstances()->getKey(SDL_SCANCODE_A))
+    {
         std::cout << "Klawisz A \n";
+    }
+    if (Input::getInstances()->getKey(SDL_SCANCODE_D))
+    {
+        std::cout << "Klawisz D \n";
     }
     if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
     {

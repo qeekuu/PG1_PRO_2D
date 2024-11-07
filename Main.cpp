@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 		
 
 		line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
-		lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
+		//lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
 		circle.draw_circle(255, 255, 255, 255, 500, 500, 70);
 		std::vector<Point2D> points =
 		{
@@ -51,10 +51,15 @@ int main(int argc, char* argv[])
 		};*/
 		SDL_Color fillColor = PrimitiveRenderer::fillColor(255, 0, 0, 255);
 		SDL_Color boundaryColor = PrimitiveRenderer::boundaryColor(0, 0, 255, 255);
+		SDL_Color fillColor_2 = PrimitiveRenderer::fillColor(0,255,0,255);
+		SDL_Color boundaryColor_2 = PrimitiveRenderer::boundaryColor(255, 255, 255, 255);
+		SDL_Color fillColor_3 = PrimitiveRenderer::fillColor(0, 255, 0, 255);
+		SDL_Color boundaryColor_3 = PrimitiveRenderer::boundaryColor(210, 50, 20, 255);
 		PrimitiveRenderer::draw_polygon(210,50,20,255,points,polygon);
-		triangle.draw_triangle(255, 255, 0, 255, 100, 100, 200, 150, 150, 250);
-		
+		triangle.draw_triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
+		circle.RiteracyjnyBoundaryFill(Engine::getInstance()->getRenderer(),500,500,fillColor_2,boundaryColor_2);
 		fillRenderer.RiteracyjnyBoundaryFill(Engine::getInstance()->getRenderer(), 500, 200, fillColor, boundaryColor);
+		polygon.RiteracyjnyBoundaryFill(Engine::getInstance()->getRenderer(),199,102,fillColor_3,boundaryColor_3);
 		PrimitiveRenderer::render();
 	}
 	Engine::getInstance()->close();
