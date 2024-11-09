@@ -1,7 +1,7 @@
 #include "Point2D.h"
 #include <iostream>
 
-Point2D::Point2D(int x, int y) : x{ x }, y{ y }
+Point2D::Point2D(unsigned int x,unsigned  int y) : x{ x }, y{ y }
 {
 
 }

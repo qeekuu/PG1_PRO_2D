@@ -6,6 +6,7 @@
 class DrawableObject : virtual public GameObject
 {
 public:
-	virtual void draw(std::vector<Point2D> points, Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
+	virtual void draw() = 0;
+	virtual void fill(SDL_Color fillColor, SDL_Color boundryColor) = 0;
 };
 

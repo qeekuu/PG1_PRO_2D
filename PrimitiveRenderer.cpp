@@ -105,10 +105,10 @@ void PrimitiveRenderer::draw_ellipse(Uint8 r, Uint8 g, Uint8 b, Uint8 an, int xc
 
     SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), r, g, b, an);
 
-    for (a = 0; a < M_PI / 2; a += step)  
+    for (a = 0; a <2 * M_PI ; a += step)  
     {
-        x = R * cos(a) + 0.5;  
-        y = R2 * sin(a) + 0.5;
+        x = R * cos(a);  
+        y = R2 * sin(a);
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc + y);
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc + y);
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc - y);
@@ -165,7 +165,7 @@ bool PrimitiveRenderer::segmentIntersect(Point2D point1, Point2D point2, Point2D
         return false;
     }
 }
-void PrimitiveRenderer::draw_polygon(Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::vector<Point2D>& points, PrimitiveRenderer polygon)
+void PrimitiveRenderer::draw_polygon(Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::vector<Point2D>& points)
 {
     for (int i = 0; i < points.size(); i++)
     {
@@ -187,9 +187,9 @@ void PrimitiveRenderer::draw_polygon(Uint8 r, Uint8 g, Uint8 b, Uint8 a, std::ve
     
     for (int i = 0; i < points.size()-1; i++)
     {
-        polygon.draw_line(r, g, b, a, points[i].getCoordinates('X'), points[i].getCoordinates('Y'), points[i + 1].getCoordinates('X'),points[i+1].getCoordinates('Y'));
+        draw_line(r, g, b, a, points[i].getCoordinates('X'), points[i].getCoordinates('Y'), points[i + 1].getCoordinates('X'),points[i+1].getCoordinates('Y'));
     }
-    polygon.draw_line(r, g, b, a, points.back().getCoordinates('X'), points.back().getCoordinates('Y'), points.front().getCoordinates('X'), points.front().getCoordinates('Y'));
+    draw_line(r, g, b, a, points.back().getCoordinates('X'), points.back().getCoordinates('Y'), points.front().getCoordinates('X'), points.front().getCoordinates('Y'));
 }
 
 SDL_Color PrimitiveRenderer::fillColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
@@ -206,9 +206,10 @@ SDL_Color PrimitiveRenderer::boundaryColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 
 void PrimitiveRenderer::RiteracyjnyBoundaryFill(SDL_Renderer* renderer, int x, int y, SDL_Color fillColor, SDL_Color boundaryColor)
 {
+    SDL_RenderFlush(renderer);
     std::stack<std::pair<int, int>> DSD;
     DSD.push({ x, y });
-
+    
     int width, height;
     SDL_GetRendererOutputSize(renderer, &width, &height);
 

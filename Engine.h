@@ -18,7 +18,7 @@ private:
     static Engine* instance;
     SDL_Window* window = nullptr;
     SDL_Renderer* renderer = nullptr;
-    bool isRunning;
+    bool isRunning = false;
     int windowW = 800;
     int windowH = 600;
     const char* title = "";

@@ -1,15 +1,23 @@
 #include "Rectangle.h"
 #include "PrimitiveRenderer.h"
-void Rectangle::draw(std::vector<Point2D> points, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+
+Rectangle::Rectangle(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int x3, unsigned int y3, unsigned int x4, unsigned int y4)
+	: r{ r }, g{ g }, b{ b }, a{ a }, point1{ x1,y1 }, point2{ x2, y2 }, point3{ x3, y3 }, point4{ x4, y4 }, xc{0}, yc{0}
 {
-	PrimitiveRenderer rectangle;
-	int x1 = points[0].getCoordinates('X'), 
-		x2 = points[1].getCoordinates('X'), 
-		x3 = points[2].getCoordinates('X'), 
-		x4 = points[3].getCoordinates('X'), 
-		y1 = points[0].getCoordinates('Y'),
-		y2 = points[1].getCoordinates('Y'),
-		y3 = points[2].getCoordinates('Y'),
-		y4 = points[3].getCoordinates('Y');
-	rectangle.draw_rectangle(r,g,b,a,x1,y1,x2,y2,x3,y3,x4,y4);
+
+}
+
+void Rectangle::draw()
+{
+	PrimitiveRenderer::draw_rectangle(r,g,b,a,point1.getCoordinates('X'), point1.getCoordinates('Y'),
+		point2.getCoordinates('X'), point2.getCoordinates('Y'), point3.getCoordinates('X'), point3.getCoordinates('Y'), point4.getCoordinates('X'), point4.getCoordinates('Y'));
+}
+
+void Rectangle::fill(SDL_Color fillColor, SDL_Color boundryColor)
+{
+	//xc,yc - wspolrzedne srodka
+	// Obliczanie srodka prostokata
+	xc = (point1.getCoordinates('X') + point2.getCoordinates('X') + point3.getCoordinates('X') + point4.getCoordinates('X')) / 4;
+	yc = (point1.getCoordinates('Y') + point2.getCoordinates('Y') + point3.getCoordinates('Y') + point4.getCoordinates('Y')) / 4;
+	PrimitiveRenderer::RiteracyjnyBoundaryFill(Engine::getInstance()->getRenderer(),xc,yc,fillColor,boundryColor);
 }
