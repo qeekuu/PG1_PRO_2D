@@ -206,6 +206,8 @@ SDL_Color PrimitiveRenderer::boundaryColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 
 void PrimitiveRenderer::RiteracyjnyBoundaryFill(SDL_Renderer* renderer, int x, int y, SDL_Color fillColor, SDL_Color boundaryColor)
 {
+    if (renderer == nullptr)
+        return;
     SDL_RenderFlush(renderer);
     std::stack<std::pair<int, int>> DSD;
     DSD.push({ x, y });

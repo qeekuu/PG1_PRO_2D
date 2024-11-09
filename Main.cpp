@@ -10,6 +10,13 @@
 #include "Ellipse.h"
 int main(int argc, char* argv[])
 {
+	// pomocnicze
+	bool translated = false;
+	bool rotated = false;
+	bool rotatedPoint = false;
+	bool scale = false;
+	bool scalePoint = false;
+
 		std::vector<Point2D> points =
 		{
 			Point2D(100,100),
@@ -29,10 +36,10 @@ int main(int argc, char* argv[])
 		Triangle triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
 		PrimitiveRenderer fillRenderer;
 		PrimitiveRenderer line_p;
-		Circle circle(255, 255, 255, 255, 500, 500, 70);
+		Circle circle(255, 255, 255, 255, 100, 100, 70);
 		Polygon polygon(210, 50, 20, 255, points);
 		LineSegment line(300, 100, 400, 500);
-		Ellipse ellipse(255,0,0,255,200,400,70,40);
+		Ellipse ellipse(255,0,0,255,200,50,70,40);
 		
 	while (Engine::getInstance()->running()==true)
 	{
@@ -57,16 +64,57 @@ int main(int argc, char* argv[])
 		ellipse.draw();
 		circle.draw();
 		rectangle.draw();
-		rectangle.fill(fillColor, boundaryColor);
-		circle.fill(fillColor_2,boundaryColor_2);
-		polygon.fill(fillColor_3,boundaryColor_3);
-		ellipse.fill(fillColor_4, boundaryColor_4);
-		triangle.fill(fillColor_5,boundaryColor_5);
+		/*
+		if (!translated)
+		{
+			ellipse.translate(100, -100);
+			ellipse.draw();
+			translated = true;
+		}
+		*/
+		/*
+		if (!rotated)
+		{
+			ellipse.rotate(15);
+			ellipse.draw();
+			rotated = true;
+		}
+		*/
+		/*
+		if (!rotatedPoint)
+		{
+			triangle.rotatePoint(20, 15, 15);
+			triangle.draw();
+			rotatedPoint = true;
+		}
+		*/
+		/*
+		if (!scale)
+		{
+			ellipse.scale(2);
+			ellipse.draw();
+			scale = true;
+		}
+		*/
+		/*
+		if (!scalePoint)
+		{
+			ellipse.scalePoint(2, 1, 1);
+			ellipse.draw();
+			scalePoint = true;
+		}
+		*/
+		//rectangle.fill(fillColor, boundaryColor);
+		//circle.fill(fillColor_2,boundaryColor_2);
+		//polygon.fill(fillColor_3,boundaryColor_3);
+		//ellipse.fill(fillColor_4, boundaryColor_4);
+		//triangle.fill(fillColor_5,boundaryColor_5);
 		PrimitiveRenderer::render();
 		
 		
 		
 	}
+
 	Engine::getInstance()->close();
 	return 0;
 }

@@ -53,3 +53,32 @@ void Polygon::fill(SDL_Color fillColor, SDL_Color boundryColor)
 {
 	PrimitiveRenderer::RiteracyjnyBoundaryFill(Engine::getInstance()->getRenderer(),xc,yc,fillColor,boundryColor);
 }
+
+void Polygon::translate(int tx, int ty)
+{
+
+
+}
+
+void Polygon::rotate(double alfa)
+{
+
+
+}
+
+void Polygon::rotatePoint(double alfa, int x, int y)
+{
+
+
+}
+
+void Polygon::scale(double k)
+{
+
+}
+
+void Polygon::scalePoint(double k, int x, int y)
+{
+
+
+}
