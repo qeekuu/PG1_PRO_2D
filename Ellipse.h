@@ -15,5 +15,6 @@ private:
 	Uint8 r,  g,  b,  an;
 	unsigned int R, R2;
 	Point2D ellipseCenter;
+	double rotationAngle;
 };
 

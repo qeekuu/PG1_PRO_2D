@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include <vector>
 #include "Point2D.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 class DrawableObject : virtual public GameObject
 {
 public:

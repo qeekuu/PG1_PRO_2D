@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Engine.h"
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <vector>
 #include "Point2D.h"
 class PrimitiveRenderer

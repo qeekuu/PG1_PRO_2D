@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 		Circle circle(255, 255, 255, 255, 100, 100, 70);
 		Polygon polygon(210, 50, 20, 255, points);
 		LineSegment line(300, 100, 400, 500);
-		Ellipse ellipse(255,0,0,255,200,50,70,40);
+		Ellipse ellipse(255,0,0,255,400,500,70,40);
 		
 	while (Engine::getInstance()->running()==true)
 	{
@@ -64,46 +64,47 @@ int main(int argc, char* argv[])
 		ellipse.draw();
 		circle.draw();
 		rectangle.draw();
-		/*
+			
 		if (!translated)
 		{
-			ellipse.translate(100, -100);
-			ellipse.draw();
+			polygon.translate(150, 150);
+			polygon.draw();
 			translated = true;
 		}
-		*/
+		
 		/*
 		if (!rotated)
 		{
-			ellipse.rotate(15);
+			ellipse.rotate(20);
 			ellipse.draw();
 			rotated = true;
 		}
 		*/
-		/*
+		/*	
 		if (!rotatedPoint)
 		{
-			triangle.rotatePoint(20, 15, 15);
-			triangle.draw();
+			ellipse.rotatePoint(20, 15, 15);
+			ellipse.draw();
 			rotatedPoint = true;
 		}
 		*/
 		/*
 		if (!scale)
 		{
-			ellipse.scale(2);
-			ellipse.draw();
+			polygon.scale(2);
+			polygon.draw();
 			scale = true;
 		}
 		*/
 		/*
 		if (!scalePoint)
 		{
-			ellipse.scalePoint(2, 1, 1);
-			ellipse.draw();
+			polygon.scalePoint(2, 1, 1);
+			polygon.draw();
 			scalePoint = true;
 		}
 		*/
+
 		//rectangle.fill(fillColor, boundaryColor);
 		//circle.fill(fillColor_2,boundaryColor_2);
 		//polygon.fill(fillColor_3,boundaryColor_3);

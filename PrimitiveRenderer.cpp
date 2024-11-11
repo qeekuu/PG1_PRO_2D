@@ -1,8 +1,9 @@
 #include "PrimitiveRenderer.h"
+#include <cmath>
 #include <iostream>
 #include "Engine.h"
-#include <SDL.h>
-#include <SDL_rect.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
 #include <math.h>
 #include <vector>
 #include "Point2D.h"
@@ -101,7 +102,7 @@ void PrimitiveRenderer::draw_ellipse(Uint8 r, Uint8 g, Uint8 b, Uint8 an, int xc
 {
     float a = 0.0;
     int x, y;
-    float step = M_PI / (4 * std::max(R, R2));  
+    float step = M_PI / (4 * std::max(R, R2));  // Rozdzielczość rysowania elipsy
 
     SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), r, g, b, an);
 
@@ -109,6 +110,7 @@ void PrimitiveRenderer::draw_ellipse(Uint8 r, Uint8 g, Uint8 b, Uint8 an, int xc
     {
         x = R * cos(a);  
         y = R2 * sin(a);
+
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc + y);
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc + y);
         SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc - y);
