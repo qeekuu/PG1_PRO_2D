@@ -108,14 +108,6 @@ int main(int argc, char* argv[])
 		SDL_Color boundaryColor_4 = PrimitiveRenderer::fillColor(255, 0, 0, 255);
 		SDL_Color fillColor_5 = PrimitiveRenderer::fillColor(76, 140, 10, 255);
 		SDL_Color boundaryColor_5 = PrimitiveRenderer::fillColor(255, 255, 0, 255);
-<<<<<<< HEAD
-		polygon.draw();
-		
-		//triangle.draw();
-		//ellipse.draw();
-		//circle.draw();
-		//rectangle.draw();
-=======
 
 		/* polygon.draw(); */
 		/* triangle.draw(); */
@@ -124,11 +116,9 @@ int main(int argc, char* argv[])
 		/* rectangle.draw(); */
 
 		player.draw();
->>>>>>> pro-kuba-tra
 			
 		/*if (!translated)
 		{
-<<<<<<< HEAD
 			polygon.translate(150, 150);
 			
 			polygon.draw();
@@ -142,12 +132,6 @@ int main(int argc, char* argv[])
 			polygon.draw();
 			rotated = true;
 		}*/
-=======
-			triangle.translate(150, 150);
-			triangle.draw();
-			translated = true;
-		}
-
 		
 		/* if (!rotated) */
 		/* { */
@@ -155,7 +139,6 @@ int main(int argc, char* argv[])
 			/* polygon.draw(); */
 			/* rotated = true; */
 		/* } */
->>>>>>> pro-kuba-tra
 		
 		/*
 		if (!rotatedPoint)
@@ -182,19 +165,12 @@ int main(int argc, char* argv[])
 		}*/
 		
 
-<<<<<<< HEAD
-		//rectangle.fill(fillColor, boundaryColor);
-		//circle.fill(fillColor_2,boundaryColor_2);
-		polygon.fill(fillColor_3, boundaryColor_3);
-		//ellipse.fill(fillColor_4, boundaryColor_4);
-		//triangle.fill(fillColor_5,boundaryColor_5);
-=======
 		/* rectangle.fill(fillColor, boundaryColor); */
 		/* circle.fill(fillColor_2,boundaryColor_2); */
 		/* polygon.fill(fillColor_3, boundaryColor_3); */
 		/* ellipse.fill(fillColor_4, boundaryColor_4); */
 		/* triangle.fill(fillColor_5,boundaryColor_5); */
->>>>>>> pro-kuba-tra
+
 		PrimitiveRenderer::render();
 		
 		
