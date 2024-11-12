@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Ellipse.h"
 #include "Engine.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <vector>
 #include "Point2D.h"
 class PrimitiveRenderer

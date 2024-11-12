@@ -45,9 +45,9 @@ int main(int argc, char* argv[])
 	{
 		Engine::getInstance()->update();
 		PrimitiveRenderer::setWindowColor(0, 0, 0, 255);
-		pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
-		line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
-		lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
+		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
+		//line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
+		//lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
 		
 		SDL_Color fillColor = PrimitiveRenderer::fillColor(255, 0, 0, 255);
 		SDL_Color boundaryColor = PrimitiveRenderer::boundaryColor(0, 0, 255, 255);
@@ -60,27 +60,29 @@ int main(int argc, char* argv[])
 		SDL_Color fillColor_5 = PrimitiveRenderer::fillColor(76, 140, 10, 255);
 		SDL_Color boundaryColor_5 = PrimitiveRenderer::fillColor(255, 255, 0, 255);
 		polygon.draw();
-		triangle.draw();
-		ellipse.draw();
-		circle.draw();
-		rectangle.draw();
+		
+		//triangle.draw();
+		//ellipse.draw();
+		//circle.draw();
+		//rectangle.draw();
 			
-		if (!translated)
+		/*if (!translated)
 		{
 			polygon.translate(150, 150);
+			
 			polygon.draw();
 			translated = true;
-		}
+		}*/
+
 		
-		/*	
-		if (!rotated)
+		/*if (!rotated)
 		{
-			ellipse.rotate(30);
-			ellipse.draw();
+			polygon.rotate(30);
+			polygon.draw();
 			rotated = true;
-		}
-		*/
-		/*	
+		}*/
+		
+		/*
 		if (!rotatedPoint)
 		{
 			ellipse.rotatePoint(20, 15, 15);
@@ -88,26 +90,26 @@ int main(int argc, char* argv[])
 			rotatedPoint = true;
 		}
 		*/
-		/*
-		if (!scale)
+		
+		/*if (!scale)
 		{
 			polygon.scale(2);
 			polygon.draw();
 			scale = true;
-		}
-		*/
-		/*
-		if (!scalePoint)
+		}*/
+		
+		
+		/*if (!scalePoint)
 		{
 			polygon.scalePoint(2, 1, 1);
 			polygon.draw();
 			scalePoint = true;
-		}
-		*/
+		}*/
+		
 
 		//rectangle.fill(fillColor, boundaryColor);
 		//circle.fill(fillColor_2,boundaryColor_2);
-		polygon.fill(fillColor_3,boundaryColor_3);
+		polygon.fill(fillColor_3, boundaryColor_3);
 		//ellipse.fill(fillColor_4, boundaryColor_4);
 		//triangle.fill(fillColor_5,boundaryColor_5);
 		PrimitiveRenderer::render();
