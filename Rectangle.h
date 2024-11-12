@@ -12,6 +12,22 @@ class Rectangle : public ShapeObject
 		void rotatePoint(double alfa, int x, int y) override;
 		void scale(double k) override;
 		void scalePoint(double k, int x, int y) override;
+		Point2D& getPoint1()	
+		{
+			return point1;
+		}
+		Point2D& getPoint2()	
+		{
+			return point2;
+		}
+		Point2D& getPoint3()	
+		{
+			return point3;
+		}
+		Point2D& getPoint4()	
+		{
+			return point4;
+		}
 	private:
 		Point2D point1, point2, point3, point4;
 		Uint8 r, g, b, a;

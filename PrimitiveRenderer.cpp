@@ -3,8 +3,8 @@
 #include <iostream>
 #include "Ellipse.h"
 #include "Engine.h"
-#include <SDL.h>
-#include <SDL_rect.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_rect.h>
 #include <math.h>
 #include <vector>
 #include "Point2D.h"

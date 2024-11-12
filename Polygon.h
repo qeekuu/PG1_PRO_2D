@@ -13,10 +13,10 @@ public:
 	void rotatePoint(double alfa, int x, int y) override;
 	void scale(double k) override;
 	void scalePoint(double k, int x, int y) override;
-	void calculateCenter();
 private:
 	Uint8 r, g, b, a;
 	double xc, yc, A = 0.0;
 	std::vector<Point2D>& points;
+	void calculateCenter();
 };
 

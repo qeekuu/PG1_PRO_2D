@@ -27,3 +27,13 @@ void Point2D::setCoordinates(unsigned int x, unsigned int y)
 	this->x = x;
 	this->y = y;
 }
+
+void Point2D::setCoordinatesX(unsigned int x)
+{
+	this->x = x;
+}
+
+void Point2D::setCoordinatesY(unsigned int y)
+{
+	this->y = y;
+}
