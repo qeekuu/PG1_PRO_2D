@@ -19,11 +19,10 @@ int main(int argc, char* argv[])
 	bool rotatedPoint = false;
 	bool scale = false;
 	bool scalePoint = false;
-	int w = 0;
-	int s = 0;
-	int a = 0;
-	int d = 0;
-
+	Point2D r1(400, 100);
+	Point2D r2(600, 100);
+	Point2D r3(600, 300);
+	Point2D r4(400, 300);
 		std::vector<Point2D> points =
 		{
 			Point2D(100,100),
@@ -39,7 +38,7 @@ int main(int argc, char* argv[])
 		Point2D Point(400,300);
 		PrimitiveRenderer pointR;
 		PrimitiveRenderer lineR;
-		Rectangle rectangle(0, 0, 255, 255, 400, 100, 600, 100, 600, 300, 400, 300);
+		Rectangle rectangle(0, 0, 255, 255, r1.getCoordinates('X'), r1.getCoordinates('Y'), r2.getCoordinates('X'), r2.getCoordinates('Y'), r3.getCoordinates('X'), r3.getCoordinates('Y'), r4.getCoordinates('X'), r4.getCoordinates('Y'));
 		Triangle triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
 		PrimitiveRenderer fillRenderer;
 		PrimitiveRenderer line_p;
@@ -53,31 +52,44 @@ int main(int argc, char* argv[])
 		
 	while (Engine::getInstance()->running()==true)
 	{
+		
 		Input::getInstances()->listen();
 		if (Input::getInstances()->getKey(SDL_SCANCODE_W))
 		{
-			w++;
-			player.getRect().getPoint1().setCoordinatesY(w);
-			std::cout << "W" << std::endl;
+			
+			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') - 1);
+			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') - 1);
+			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') - 1);
+			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') - 1);
+			
 		}
 		if (Input::getInstances()->getKey(SDL_SCANCODE_S))
 		{
-			s++;
-			player.getRect().getPoint2().setCoordinatesY(s);
-			std::cout << "S" << std::endl;
+			
+			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') + 1);
+			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') + 1);
+			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') + 1);
+			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') + 1);
+			
 		}
 		if (Input::getInstances()->getKey(SDL_SCANCODE_A))
 		{
-			a++;
-			player.getRect().getPoint3().setCoordinatesX(a);
-			std::cout << "A" << std::endl;
+			
+			player.getRect().getPoint1().setCoordinatesX(player.getRect().getPoint1().getCoordinates('X') - 1);
+			player.getRect().getPoint2().setCoordinatesX(player.getRect().getPoint2().getCoordinates('X') - 1);
+			player.getRect().getPoint3().setCoordinatesX(player.getRect().getPoint3().getCoordinates('X') - 1);
+			player.getRect().getPoint4().setCoordinatesX(player.getRect().getPoint4().getCoordinates('X') - 1);
+			
 		}
 		if(Input::getInstances()->getKey(SDL_SCANCODE_D))
 		{
-			d++;
-			std::cout<<"D:" << d;
-			player.getRect().getPoint4().setCoordinatesX(d);
-			std::cout << "D" << std::endl;
+			
+			
+			player.getRect().getPoint1().setCoordinatesX(player.getRect().getPoint1().getCoordinates('X') + 1);
+			player.getRect().getPoint2().setCoordinatesX(player.getRect().getPoint2().getCoordinates('X') + 1);
+			player.getRect().getPoint3().setCoordinatesX(player.getRect().getPoint3().getCoordinates('X') + 1);
+			player.getRect().getPoint4().setCoordinatesX(player.getRect().getPoint4().getCoordinates('X') + 1);
+			
 		}
 		if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
 		{

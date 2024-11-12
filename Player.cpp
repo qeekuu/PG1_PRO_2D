@@ -3,7 +3,7 @@
 #include "Rectangle.h"
 #include "TransformableObject.h"
 #include "UpdatableObject.h"
-#include <SDL2/SDL_stdinc.h>
+#include <SDL_stdinc.h>
 
 Player::Player(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x1, unsigned int y1,unsigned int x2, unsigned int y2,unsigned int x3, unsigned int y3,unsigned int x4, unsigned int y4) : rectangle(r, g, b, a, x1, y1, x2, y2, x3, y3, x4, y4)
 {

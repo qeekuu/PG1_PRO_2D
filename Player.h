@@ -5,7 +5,7 @@
 #include "TransformableObject.h"
 #include "UpdatableObject.h"
 #include "Point2D.h"
-#include <SDL2/SDL_stdinc.h>
+#include <SDL_stdinc.h>
 
 class Player : public UpdatableObject, public DrawableObject, public TransformableObject
 {
@@ -15,7 +15,7 @@ public:
 	{
 		return rectangle;
 	}
-	
+	void draw() override;
 private:
 	Uint8 r, g, b, a;
 	Rectangle rectangle;
@@ -28,11 +28,10 @@ private:
 	void scalePoint(double k, int x, int y) override;
 
 	/* DrawableObject */
-	virtual void draw() override;
-	virtual void fill(SDL_Color fillColor, SDL_Color boundryColor) override;
+	void fill(SDL_Color fillColor, SDL_Color boundryColor) override;
 	
 	/* UpdatableObject */
-	virtual void update() override;
+	void update() override;
 
 
 };

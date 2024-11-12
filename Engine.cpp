@@ -1,7 +1,7 @@
 #include "Engine.h"
-#include <SDL2/SDL_scancode.h>
+#include <SDL_scancode.h>
 #include <iostream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "Input.h"
 #include "Player.h"
 
