@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "PrimitiveRenderer.h"
 class Engine {
 public:
