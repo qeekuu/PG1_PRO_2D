@@ -1,7 +1,10 @@
 #include "Engine.h"
+#include <SDL2/SDL_scancode.h>
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Input.h"
+#include "Player.h"
+
 bool Engine::Init() 
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -62,31 +65,6 @@ void Engine::setRunning(bool quit)
 
 void Engine::update()
 {
-    Input::getInstances()->listen();
-    if (Input::getInstances()->getKey(SDL_SCANCODE_G))
-    {
-        std::cout << "Klawisz G \n";
-    }
-    if (Input::getInstances()->getKey(SDL_SCANCODE_A))
-    {
-        std::cout << "Klawisz A \n";
-    }
-    if (Input::getInstances()->getKey(SDL_SCANCODE_D))
-    {
-        std::cout << "Klawisz D \n";
-    }
-    if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
-    {
-        std::cout << "Lewy przycisk \n";
-    }
-    if (Input::getInstances()->getButton(Input::RIGHT_BUTTON))
-    {
-        std::cout << "Prawy przycisk \n";
-    }
-    if (Input::getInstances()->getButton(Input::MIDDLE_BUTTON))
-    {
-        std::cout << "Srodkowy przycisk \n";
-    }
 }
 
 

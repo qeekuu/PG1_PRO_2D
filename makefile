@@ -5,7 +5,7 @@ LDFLAGS=-lSDL2  # Flagi linkowania
 EXEC=window_example  # Nazwa pliku wykonywalnego
 
 # Pliki źródłowe
-SOURCES=Engine.cpp Input.cpp PrimitiveRenderer.cpp Main.cpp Circle.cpp Ellipse.cpp GameObject.cpp Rectangle.cpp Polygon.cpp Triangle.cpp Point2D.cpp DrawableObject.cpp LineSegment.cpp ShapeObject.cpp TransformableObject.cpp UpdatableObject.cpp
+SOURCES=Engine.cpp Input.cpp PrimitiveRenderer.cpp Main.cpp Circle.cpp Ellipse.cpp GameObject.cpp Rectangle.cpp Polygon.cpp Triangle.cpp Point2D.cpp DrawableObject.cpp LineSegment.cpp ShapeObject.cpp TransformableObject.cpp UpdatableObject.cpp Player.cpp
 
 # Pliki obiektowe wynikające z plików źródłowych
 OBJECTS=$(SOURCES:.cpp=.o)

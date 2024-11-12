@@ -1,6 +1,8 @@
 #include <iostream>
+#include <ostream>
 #include "Engine.h"
 #include "Input.h"
+#include "Player.h"
 #include "Point2D.h"
 #include "LineSegment.h"
 #include "Rectangle.h"
@@ -8,6 +10,7 @@
 #include "Circle.h"
 #include "Polygon.h"
 #include "Ellipse.h"
+
 int main(int argc, char* argv[])
 {
 	// pomocnicze
@@ -16,6 +19,10 @@ int main(int argc, char* argv[])
 	bool rotatedPoint = false;
 	bool scale = false;
 	bool scalePoint = false;
+	int w = 0;
+	int s = 0;
+	int a = 0;
+	int d = 0;
 
 		std::vector<Point2D> points =
 		{
@@ -40,10 +47,52 @@ int main(int argc, char* argv[])
 		Polygon polygon(210, 50, 20, 255, points);
 		LineSegment line(300, 100, 400, 500);
 		Ellipse ellipse(255,0,0,255,400,500,70,40);
+
+		// Player
+		Player player(255, 0, 0, 255, 390, 290, 410, 290, 410, 310, 390, 310);
 		
 	while (Engine::getInstance()->running()==true)
 	{
-		Engine::getInstance()->update();
+		Input::getInstances()->listen();
+		if (Input::getInstances()->getKey(SDL_SCANCODE_W))
+		{
+			w++;
+			player.getRect().getPoint1().setCoordinatesY(w);
+			std::cout << "W" << std::endl;
+		}
+		if (Input::getInstances()->getKey(SDL_SCANCODE_S))
+		{
+			s++;
+			player.getRect().getPoint2().setCoordinatesY(s);
+			std::cout << "S" << std::endl;
+		}
+		if (Input::getInstances()->getKey(SDL_SCANCODE_A))
+		{
+			a++;
+			player.getRect().getPoint3().setCoordinatesX(a);
+			std::cout << "A" << std::endl;
+		}
+		if(Input::getInstances()->getKey(SDL_SCANCODE_D))
+		{
+			d++;
+			std::cout<<"D:" << d;
+			player.getRect().getPoint4().setCoordinatesX(d);
+			std::cout << "D" << std::endl;
+		}
+		if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
+		{
+			std::cout << "Lewy przycisk \n";
+		}
+		if (Input::getInstances()->getButton(Input::RIGHT_BUTTON))
+		{
+			std::cout << "Prawy przycisk \n";
+		}
+		if (Input::getInstances()->getButton(Input::MIDDLE_BUTTON))
+		{
+			std::cout << "Srodkowy przycisk \n";
+		}
+		
+
 		PrimitiveRenderer::setWindowColor(0, 0, 0, 255);
 		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
 		//line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
@@ -59,15 +108,27 @@ int main(int argc, char* argv[])
 		SDL_Color boundaryColor_4 = PrimitiveRenderer::fillColor(255, 0, 0, 255);
 		SDL_Color fillColor_5 = PrimitiveRenderer::fillColor(76, 140, 10, 255);
 		SDL_Color boundaryColor_5 = PrimitiveRenderer::fillColor(255, 255, 0, 255);
+<<<<<<< HEAD
 		polygon.draw();
 		
 		//triangle.draw();
 		//ellipse.draw();
 		//circle.draw();
 		//rectangle.draw();
+=======
+
+		/* polygon.draw(); */
+		/* triangle.draw(); */
+		/* ellipse.draw(); */
+		/* circle.draw(); */
+		/* rectangle.draw(); */
+
+		player.draw();
+>>>>>>> pro-kuba-tra
 			
 		/*if (!translated)
 		{
+<<<<<<< HEAD
 			polygon.translate(150, 150);
 			
 			polygon.draw();
@@ -81,6 +142,20 @@ int main(int argc, char* argv[])
 			polygon.draw();
 			rotated = true;
 		}*/
+=======
+			triangle.translate(150, 150);
+			triangle.draw();
+			translated = true;
+		}
+
+		
+		/* if (!rotated) */
+		/* { */
+			/* polygon.rotate(30); */
+			/* polygon.draw(); */
+			/* rotated = true; */
+		/* } */
+>>>>>>> pro-kuba-tra
 		
 		/*
 		if (!rotatedPoint)
@@ -107,11 +182,19 @@ int main(int argc, char* argv[])
 		}*/
 		
 
+<<<<<<< HEAD
 		//rectangle.fill(fillColor, boundaryColor);
 		//circle.fill(fillColor_2,boundaryColor_2);
 		polygon.fill(fillColor_3, boundaryColor_3);
 		//ellipse.fill(fillColor_4, boundaryColor_4);
 		//triangle.fill(fillColor_5,boundaryColor_5);
+=======
+		/* rectangle.fill(fillColor, boundaryColor); */
+		/* circle.fill(fillColor_2,boundaryColor_2); */
+		/* polygon.fill(fillColor_3, boundaryColor_3); */
+		/* ellipse.fill(fillColor_4, boundaryColor_4); */
+		/* triangle.fill(fillColor_5,boundaryColor_5); */
+>>>>>>> pro-kuba-tra
 		PrimitiveRenderer::render();
 		
 		
