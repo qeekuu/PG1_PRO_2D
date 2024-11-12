@@ -1,6 +1,7 @@
 #include "PrimitiveRenderer.h"
 #include <cmath>
 #include <iostream>
+#include "Ellipse.h"
 #include "Engine.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_rect.h>
@@ -98,23 +99,36 @@ void PrimitiveRenderer::draw_circle(Uint8 r, Uint8 g, Uint8 b, Uint8 an, int xc,
     }
 }
 
-void PrimitiveRenderer::draw_ellipse(Uint8 r, Uint8 g, Uint8 b, Uint8 an, int xc, int yc, int R, int R2)
+void PrimitiveRenderer::draw_ellipse(Uint8 r, Uint8 g, Uint8 b, Uint8 an, double rotationAngle, int xc, int yc, int R, int R2)
 {
     float a = 0.0;
     int x, y;
     float step = M_PI / (4 * std::max(R, R2));  // Rozdzielczość rysowania elipsy
-
+	
     SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), r, g, b, an);
 
     for (a = 0; a <2 * M_PI ; a += step)  
     {
         x = R * cos(a);  
         y = R2 * sin(a);
+		if(rotationAngle != 0)
+		{
+			int x2 = x * cos(rotationAngle) - y * sin(rotationAngle);
+			int y2 = x * sin(rotationAngle) + y * cos(rotationAngle);
 
-        SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc + y);
-        SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc + y);
-        SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc - y);
-        SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc - y);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x2, yc + y2);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x2, yc + y2);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x2, yc - y2);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x2, yc - y2);
+		}
+		else
+		{
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc + y);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc + y);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc + x, yc - y);
+			SDL_RenderDrawPoint(Engine::getInstance()->getRenderer(), xc - x, yc - y);
+
+		}
     }
 }
 

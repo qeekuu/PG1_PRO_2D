@@ -1,5 +1,7 @@
 #pragma once
+#include "Point2D.h"
 #include "ShapeObject.h"
+#include <vector>
 class Polygon : public ShapeObject
 {
 public:
@@ -15,5 +17,6 @@ private:
 	Uint8 r, g, b, a;
 	double xc, yc, A;
 	std::vector<Point2D>& points;
+	void calculateCenter();
 };
 

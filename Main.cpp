@@ -72,10 +72,10 @@ int main(int argc, char* argv[])
 			translated = true;
 		}
 		
-		/*
+		/*	
 		if (!rotated)
 		{
-			ellipse.rotate(20);
+			ellipse.rotate(30);
 			ellipse.draw();
 			rotated = true;
 		}
@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 
 		//rectangle.fill(fillColor, boundaryColor);
 		//circle.fill(fillColor_2,boundaryColor_2);
-		//polygon.fill(fillColor_3,boundaryColor_3);
+		polygon.fill(fillColor_3,boundaryColor_3);
 		//ellipse.fill(fillColor_4, boundaryColor_4);
 		//triangle.fill(fillColor_5,boundaryColor_5);
 		PrimitiveRenderer::render();
