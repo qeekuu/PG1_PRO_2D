@@ -23,6 +23,12 @@ int main(int argc, char* argv[])
 	Point2D r2(600, 100);
 	Point2D r3(600, 300);
 	Point2D r4(400, 300);
+
+	bool isJumping = false;       // Informacja, czy kwadrat jest w trakcie skoku
+	float velocityY = 0.0f;       // Prêdkoœæ pionowa kwadratu
+	const float gravity = 0.5f;   // Sta³a grawitacji, dostosuj w zale¿noœci od potrzeb
+	const float jumpStrength = -10.0f; // Si³a skoku
+
 		std::vector<Point2D> points =
 		{
 			Point2D(100,100),
@@ -38,7 +44,7 @@ int main(int argc, char* argv[])
 		Point2D Point(400,300);
 		PrimitiveRenderer pointR;
 		PrimitiveRenderer lineR;
-		Rectangle rectangle(0, 0, 255, 255, r1.getCoordinates('X'), r1.getCoordinates('Y'), r2.getCoordinates('X'), r2.getCoordinates('Y'), r3.getCoordinates('X'), r3.getCoordinates('Y'), r4.getCoordinates('X'), r4.getCoordinates('Y'));
+		//Rectangle rectangle(0, 0, 255, 255, r1.getCoordinates('X'), r1.getCoordinates('Y'), r2.getCoordinates('X'), r2.getCoordinates('Y'), r3.getCoordinates('X'), r3.getCoordinates('Y'), r4.getCoordinates('X'), r4.getCoordinates('Y'));
 		Triangle triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
 		PrimitiveRenderer fillRenderer;
 		PrimitiveRenderer line_p;
@@ -90,6 +96,32 @@ int main(int argc, char* argv[])
 			player.getRect().getPoint3().setCoordinatesX(player.getRect().getPoint3().getCoordinates('X') + 1);
 			player.getRect().getPoint4().setCoordinatesX(player.getRect().getPoint4().getCoordinates('X') + 1);
 			
+		}
+		if (Input::getInstances()->getKey(SDL_SCANCODE_SPACE) && !isJumping)
+		{
+			// Rozpocznij skok
+			isJumping = true;
+			velocityY = jumpStrength;
+		}
+		if (isJumping)
+		{
+			velocityY += gravity;  // Prêdkoœæ pionowa zmniejsza siê w czasie (efekt grawitacji)
+			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') + velocityY);
+			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') + velocityY);
+			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') + velocityY);
+			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') + velocityY);
+
+			// SprawdŸ, czy kwadrat wróci³ na ziemiê (np. przy Y == 290)
+			if (player.getRect().getPoint1().getCoordinates('Y') >= 290)
+			{
+				// Resetuj pozycjê i stan skoku
+				player.getRect().getPoint1().setCoordinatesY(290);
+				player.getRect().getPoint2().setCoordinatesY(290);
+				player.getRect().getPoint3().setCoordinatesY(310);
+				player.getRect().getPoint4().setCoordinatesY(310);
+				isJumping = false;
+				velocityY = 0.0f;
+			}
 		}
 		if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
 		{
@@ -176,7 +208,7 @@ int main(int argc, char* argv[])
 			scalePoint = true;
 		}*/
 		
-
+		player.getRect().fill(fillColor,boundaryColor);
 		/* rectangle.fill(fillColor, boundaryColor); */
 		/* circle.fill(fillColor_2,boundaryColor_2); */
 		/* polygon.fill(fillColor_3, boundaryColor_3); */
