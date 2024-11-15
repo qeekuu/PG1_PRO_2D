@@ -99,8 +99,8 @@ void Engine::close()
     SDL_Quit();
     if (instance) 
     {
-        delete instance;
-        instance = nullptr;
+       delete instance;
+       instance = nullptr;
     }
 }
 

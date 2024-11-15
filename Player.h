@@ -1,5 +1,4 @@
 #pragma once
-
 #include "DrawableObject.h"
 #include "Rectangle.h"
 #include "TransformableObject.h"

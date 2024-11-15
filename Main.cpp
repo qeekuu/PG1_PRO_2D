@@ -10,6 +10,7 @@
 #include "Circle.h"
 #include "Polygon.h"
 #include "Ellipse.h"
+#include "BitmapHandler.h"
 
 int main(int argc, char* argv[])
 {
@@ -55,6 +56,35 @@ int main(int argc, char* argv[])
 
 		// Player
 		Player player(255, 0, 0, 255, 390, 290, 410, 290, 410, 310, 390, 310);
+
+		/*bitmap*/
+		BitmapHandler handler;
+		const char* path = "D:\\Filip\\PGPRO07.11.24\\rsc\\Bomba.bmp";
+		SDL_Rect rect;
+		rect.x = 100;
+		rect.y = 100;
+		rect.h = 32;
+		rect.w = 32;
+
+		SDL_Rect rect2 = { 0, 0, 100, 100 };
+		SDL_Rect rect3 = { 50, 50, 100, 100 };
+
+		SDL_Texture* texture = handler.bmpSurface(path, Engine::getInstance()->getRenderer(), &rect);
+
+		SDL_Surface* newSurface = handler.createSurface(300, 300);
+		SDL_Surface* dstSurface = handler.createSurface(300, 300);
+
+		//test zapisu - kolorowanie nowej poweirzchni
+		SDL_FillRect(newSurface, nullptr, SDL_MapRGB(newSurface->format, 255, 0, 0));
+
+		const char* savePath = "D:\\Filip\\PGPRO07.11.24\\rsc\\output.bmp";
+		handler.saveSurfaceAsBMP(newSurface, savePath);
+		
+		handler.copyBitmapSurface(newSurface, &rect2, dstSurface, &rect3);
+		
+		const char* savePath2 = "D:\\Filip\\PGPRO07.11.24\\rsc\\output2.bmp";
+		handler.saveSurfaceAsBMP(dstSurface, savePath2);
+		
 		
 	while (Engine::getInstance()->running()==true)
 	{
@@ -137,7 +167,10 @@ int main(int argc, char* argv[])
 		}
 		
 
-		PrimitiveRenderer::setWindowColor(0, 0, 0, 255);
+		PrimitiveRenderer::setWindowColor(255, 255, 255, 255);
+
+		SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
+
 		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
 		//line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
 		//lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
@@ -214,12 +247,16 @@ int main(int argc, char* argv[])
 		/* polygon.fill(fillColor_3, boundaryColor_3); */
 		/* ellipse.fill(fillColor_4, boundaryColor_4); */
 		/* triangle.fill(fillColor_5,boundaryColor_5); */
-
 		PrimitiveRenderer::render();
-		
-		
-		
+
+		/*Do aktualizacjia ekranu*/
+		//SDL_RenderPresent(Engine::getInstance()->getRenderer());
 	}
+
+	/*Zwalnianie bitmap*/
+	handler.deleteTexture(texture);
+	handler.deleteSurface(newSurface);
+	handler.deleteSurface(dstSurface);
 
 	Engine::getInstance()->close();
 	return 0;
