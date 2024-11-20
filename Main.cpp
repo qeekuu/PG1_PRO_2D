@@ -85,7 +85,26 @@ int main(int argc, char* argv[])
 		const char* savePath2 = "D:\\Filip\\PGPRO07.11.24\\rsc\\output2.bmp";
 		handler.saveSurfaceAsBMP(dstSurface, savePath2);
 		
+		SDL_Rect dstRect = { 200, 200, 32, 32 };
+		const char* spritePath = "D:\\Filip\\PGPRO07.11.24\\rsc\\PLAYER_spritesheet.bmp";
+		SDL_Texture* sprtieSheet = handler.bmpSurface(spritePath, Engine::getInstance()->getRenderer(), &dstRect);
+		if (!sprtieSheet)
+		{
+			std::cerr << "Nie uda³o siê za³adowaæ sprite sheet." << std::endl;
+			SDL_Quit();
+			return -1;
+		}
+		// Przygotowanie klatek animacji
+		const int FRAME_WIDTH = 32;
+		const int FRAME_HEIGHT = 32;
+		const int NUM_FRAMES = 4; // Liczba klatek w animacji
+		const int SHEET_WIDTH = 128; // Szerokoœæ ca³ego sprite sheet
+		int spriteSpeed = 5;
+		SDL_Rect spriteClips[NUM_FRAMES];
+		handler.createSpriteClips(spriteClips, FRAME_WIDTH, FRAME_HEIGHT, NUM_FRAMES, SHEET_WIDTH);
 		
+
+
 	while (Engine::getInstance()->running()==true)
 	{
 		

@@ -40,6 +40,33 @@ SDL_Texture *BitmapHandler::bmpSurface(const char* filePath, SDL_Renderer *rende
 	return texture;
 }
 
+/*Animowanie sprite'ów*/
+void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* spriteClips, int numFrames, SDL_Rect* dstRect, int frameDelay)
+{
+	static int currentFrame = 0;
+	static Uint32 lastTime = SDL_GetTicks();
+
+	Uint32 currentTime = SDL_GetTicks();
+	if (currentTime > lastTime + frameDelay)
+	{
+		currentFrame = (currentFrame + 1) % numFrames; // przełączenie klatek w cyklu
+		lastTime = currentTime;
+	}
+
+	// renderowanie aktualnej klatki
+	SDL_RenderCopy(renderer, texture, &spriteClips[currentFrame], dstRect);
+}
+
+/*Funkcja dzieląca sprite sheet na klatki*/
+void BitmapHandler::createSpriteClips(SDL_Rect* clips, int frameWidth, int frameHeight, int numFrames, int sheetWidth) {
+	for (int i = 0; i < numFrames; ++i) {
+		clips[i].x = (i * frameWidth) % sheetWidth; // Pozycja X klatki
+		clips[i].y = (i * frameWidth) / sheetWidth * frameHeight; // Pozycja Y klatki
+		clips[i].w = frameWidth; // Szerokość klatki
+		clips[i].h = frameHeight; // Wysokość klatki
+	}
+}
+
 /*Zapisywanie bitmapy*/
 int BitmapHandler::saveSurfaceAsBMP(SDL_Surface* surface, const char* filePath)
 {

@@ -4,6 +4,7 @@
 #include "TransformableObject.h"
 #include "UpdatableObject.h"
 #include "Point2D.h"
+#include "SpriteObject.h"
 #include <SDL_stdinc.h>
 
 class Player : public UpdatableObject, public DrawableObject, public TransformableObject
