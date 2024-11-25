@@ -40,32 +40,39 @@ SDL_Texture *BitmapHandler::bmpSurface(const char* filePath, SDL_Renderer *rende
 	return texture;
 }
 
+
 /*Animowanie sprite'ów*/
-void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect* spriteClips, int numFrames, SDL_Rect* dstRect, int frameDelay)
-{
-	static int currentFrame = 0;
+void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect spriteClips[4][4], int direction, int currentFrame, SDL_Rect* dstRect, int frameDelay, const int FRAMES_PER_DIRECTION) {
+	//static int currentFrame = 0;
+
 	static Uint32 lastTime = SDL_GetTicks();
 
 	Uint32 currentTime = SDL_GetTicks();
-	if (currentTime > lastTime + frameDelay)
-	{
-		currentFrame = (currentFrame + 1) % numFrames; // przełączenie klatek w cyklu
+	if (currentTime > lastTime + frameDelay) {
+		currentFrame = (currentFrame + 1) % FRAMES_PER_DIRECTION; 
 		lastTime = currentTime;
 	}
-
-	// renderowanie aktualnej klatki
-	SDL_RenderCopy(renderer, texture, &spriteClips[currentFrame], dstRect);
+	
+	SDL_RenderCopy(renderer, texture, &spriteClips[direction][currentFrame], dstRect);
 }
+
 
 /*Funkcja dzieląca sprite sheet na klatki*/
-void BitmapHandler::createSpriteClips(SDL_Rect* clips, int frameWidth, int frameHeight, int numFrames, int sheetWidth) {
-	for (int i = 0; i < numFrames; ++i) {
-		clips[i].x = (i * frameWidth) % sheetWidth; // Pozycja X klatki
-		clips[i].y = (i * frameWidth) / sheetWidth * frameHeight; // Pozycja Y klatki
-		clips[i].w = frameWidth; // Szerokość klatki
-		clips[i].h = frameHeight; // Wysokość klatki
+void BitmapHandler::createSpriteClips(SDL_Rect spriteClips[4][4], int frameWidth, int frameHeight, const int FRAMES_PER_DIRECTION) {
+	// Mapowanie kierunków na wiersze sprite sheet
+	int directionMapping[4] = { 3, 2, 1, 0 }; 
+
+	for (int dir = 0; dir < 4; ++dir) { 
+		for (int frame = 0; frame < FRAMES_PER_DIRECTION; ++frame) { 
+			spriteClips[dir][frame].x = frame * frameWidth;
+			spriteClips[dir][frame].y = directionMapping[dir] * frameHeight;
+			spriteClips[dir][frame].w = frameWidth;
+			spriteClips[dir][frame].h = frameHeight;
+		}
 	}
 }
+
+
 
 /*Zapisywanie bitmapy*/
 int BitmapHandler::saveSurfaceAsBMP(SDL_Surface* surface, const char* filePath)
