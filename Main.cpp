@@ -15,12 +15,14 @@
 
 int main(int argc, char* argv[])
 {
-	// pomocnicze
+	/*
 	bool translated = false;
 	bool rotated = false;
 	bool rotatedPoint = false;
 	bool scale = false;
 	bool scalePoint = false;
+	*/
+
 	Point2D r1(400, 100);
 	Point2D r2(600, 100);
 	Point2D r3(600, 300);
@@ -54,15 +56,9 @@ int main(int argc, char* argv[])
 		Player player(255, 0, 0, 255, 390, 290, 410, 290, 410, 310, 390, 310);
 
 		/*bitmap*/
-		/*
 		BitmapHandler handler;
 		const char* path = "D:\\Filip\\PGPRO07.11.24\\rsc\\Bomba.bmp";
-		SDL_Rect rect;
-		rect.x = 100;
-		rect.y = 100;
-		rect.h = 32;
-		rect.w = 32;
-
+		SDL_Rect rect = { 100, 100, 32, 32 };
 		SDL_Rect rect2 = { 0, 0, 100, 100 };
 		SDL_Rect rect3 = { 50, 50, 100, 100 };
 
@@ -81,8 +77,6 @@ int main(int argc, char* argv[])
 		
 		const char* savePath2 = "D:\\Filip\\PGPRO07.11.24\\rsc\\output2.bmp";
 		handler.saveSurfaceAsBMP(dstSurface, savePath2);
-		
-		*/
 
 	while (Engine::getInstance()->running()==true)
 	{
@@ -110,9 +104,7 @@ int main(int argc, char* argv[])
 
 		//PrimitiveRenderer::setWindowColor(255, 255, 255, 255);
 
-		//SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
-		//SDL_RenderCopy(Engine::getInstance()->getRenderer(), sprtieSheet, &spriteClips[direction][frame], &dstRect);
-
+		SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
 
 		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
 		//line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
@@ -183,8 +175,6 @@ int main(int argc, char* argv[])
 			polygon.draw();
 			scalePoint = true;
 		}*/
-		
-		//player.getRect().fill(fillColor,boundaryColor);
 
 		/* rectangle.fill(fillColor, boundaryColor); */
 		/* circle.fill(fillColor_2,boundaryColor_2); */
@@ -198,12 +188,9 @@ int main(int argc, char* argv[])
 	}
 
 	/*Zwalnianie bitmap*/
-	/*
 	handler.deleteTexture(texture);
 	handler.deleteSurface(newSurface);
 	handler.deleteSurface(dstSurface);
-	handler.freeSpriteClips(spriteClips, numDirections);
-	*/
 
 	Engine::getInstance()->close();
 	return 0;
