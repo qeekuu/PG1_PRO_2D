@@ -99,12 +99,6 @@ int main(int argc, char* argv[])
 		SDL_Texture* sprtieSheet = handler.bmpSurface(spritePath, Engine::getInstance()->getRenderer(), &dstRect);
 		
 		// Przygotowanie klatek animacji
-		const int FRAMES_PER_DIRECTION = 4;
-		SDL_Rect spriteClips[4][FRAMES_PER_DIRECTION];
-		const int FRAME_WIDTH = 32;
-		const int FRAME_HEIGHT = 32;
-		const int NUM_FRAMES = 4; // Liczba klatek w animacji
-		const int SHEET_WIDTH = 128; // Szerokoœæ ca³ego sprite sheet
 		int spriteSpeed = 5;
 		int direction = IDLE;
 		int frame = 0;
@@ -112,8 +106,16 @@ int main(int argc, char* argv[])
 		int frameCount = 0;
 		int previousDirection = IDLE;
 
+		int numDirections = 4;
+		int framesPerDirection = 4;
+		int frameWidth = 32;
+		int frameHeight = 32;
+		int directionMapping[4] = { 3, 2, 1, 0 };
+		int currentFrame = 0;
+
 		//SDL_Rect spriteClips[NUM_FRAMES];
-		handler.createSpriteClips(spriteClips, FRAME_WIDTH, FRAME_HEIGHT, FRAMES_PER_DIRECTION);
+		//handler.createSpriteClips(spriteClips, FRAME_WIDTH, FRAME_HEIGHT, FRAMES_PER_DIRECTION);
+		SDL_Rect** spriteClips = handler.createSpriteClips(numDirections, framesPerDirection, frameWidth, frameHeight, directionMapping);
 		
 
 
@@ -121,45 +123,6 @@ int main(int argc, char* argv[])
 	{
 		
 		Input::getInstances()->listen();
-		/*
-		if (Input::getInstances()->getKey(SDL_SCANCODE_W))
-		{
-			
-			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') - 1);
-			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') - 1);
-			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') - 1);
-			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') - 1);
-			
-		}
-		if (Input::getInstances()->getKey(SDL_SCANCODE_S))
-		{
-			
-			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') + 1);
-			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') + 1);
-			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') + 1);
-			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') + 1);
-			
-		}
-		if (Input::getInstances()->getKey(SDL_SCANCODE_A))
-		{
-			
-			player.getRect().getPoint1().setCoordinatesX(player.getRect().getPoint1().getCoordinates('X') - 1);
-			player.getRect().getPoint2().setCoordinatesX(player.getRect().getPoint2().getCoordinates('X') - 1);
-			player.getRect().getPoint3().setCoordinatesX(player.getRect().getPoint3().getCoordinates('X') - 1);
-			player.getRect().getPoint4().setCoordinatesX(player.getRect().getPoint4().getCoordinates('X') - 1);
-			
-		}
-		if(Input::getInstances()->getKey(SDL_SCANCODE_D))
-		{
-			
-			
-			player.getRect().getPoint1().setCoordinatesX(player.getRect().getPoint1().getCoordinates('X') + 1);
-			player.getRect().getPoint2().setCoordinatesX(player.getRect().getPoint2().getCoordinates('X') + 1);
-			player.getRect().getPoint3().setCoordinatesX(player.getRect().getPoint3().getCoordinates('X') + 1);
-			player.getRect().getPoint4().setCoordinatesX(player.getRect().getPoint4().getCoordinates('X') + 1);
-			
-		}
-		*/
 
 		// Obs³uga wejœcia u¿ytkownika (poruszanie sprite'em)
 
@@ -197,7 +160,7 @@ int main(int argc, char* argv[])
 			frameCount++;
 			if (frameCount >= frameDelay) 
 			{
-				frame = (frame + 1) % FRAMES_PER_DIRECTION; // Loop through animation frames
+				frame = (frame + 1) % framesPerDirection; // Loop through animation frames
 				frameCount = 0;
 			}
 		}
@@ -205,35 +168,6 @@ int main(int argc, char* argv[])
 		{
 			frame = 0;
 		}
-
-		/*
-		if (Input::getInstances()->getKey(SDL_SCANCODE_SPACE) && !isJumping)
-		{
-			// Rozpocznij skok
-			isJumping = true;
-			velocityY = jumpStrength;
-		}
-		if (isJumping)
-		{
-			velocityY += gravity;  // Prêdkoœæ pionowa zmniejsza siê w czasie (efekt grawitacji)
-			player.getRect().getPoint1().setCoordinatesY(player.getRect().getPoint1().getCoordinates('Y') + velocityY);
-			player.getRect().getPoint2().setCoordinatesY(player.getRect().getPoint2().getCoordinates('Y') + velocityY);
-			player.getRect().getPoint3().setCoordinatesY(player.getRect().getPoint3().getCoordinates('Y') + velocityY);
-			player.getRect().getPoint4().setCoordinatesY(player.getRect().getPoint4().getCoordinates('Y') + velocityY);
-
-			// SprawdŸ, czy kwadrat wróci³ na ziemiê (np. przy Y == 290)
-			if (player.getRect().getPoint1().getCoordinates('Y') >= 290)
-			{
-				// Resetuj pozycjê i stan skoku
-				player.getRect().getPoint1().setCoordinatesY(290);
-				player.getRect().getPoint2().setCoordinatesY(290);
-				player.getRect().getPoint3().setCoordinatesY(310);
-				player.getRect().getPoint4().setCoordinatesY(310);
-				isJumping = false;
-				velocityY = 0.0f;
-			}
-		}
-		*/
 
 		// Obs³uga skoku
 		if (Input::getInstances()->getKey(SDL_SCANCODE_SPACE) && !isJumping) {
@@ -256,8 +190,9 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(Engine::getInstance()->getRenderer());
 
 		// Animacja sprite'a
-		if(direction != IDLE)
-			handler.animateBMPSprite(Engine::getInstance()->getRenderer(), sprtieSheet, spriteClips, direction, frame, &dstRect, frameDelay, FRAMES_PER_DIRECTION);
+		if (direction != IDLE)
+			handler.animateBMPSprite(Engine::getInstance()->getRenderer(), sprtieSheet, spriteClips, numDirections, direction, currentFrame, &dstRect, frameDelay, framesPerDirection);
+			//handler.animateBMPSprite(Engine::getInstance()->getRenderer(), sprtieSheet, spriteClips, direction, frame, &dstRect, frameDelay, FRAMES_PER_DIRECTION);
 		else
 			SDL_RenderCopy(Engine::getInstance()->getRenderer(), sprtieSheet, &spriteClips[DOWN][0], &dstRect);
 
@@ -368,6 +303,7 @@ int main(int argc, char* argv[])
 	handler.deleteTexture(texture);
 	handler.deleteSurface(newSurface);
 	handler.deleteSurface(dstSurface);
+	handler.freeSpriteClips(spriteClips, numDirections);
 
 	Engine::getInstance()->close();
 	return 0;

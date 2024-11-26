@@ -42,36 +42,52 @@ SDL_Texture *BitmapHandler::bmpSurface(const char* filePath, SDL_Renderer *rende
 
 
 /*Animowanie sprite'ów*/
-void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect spriteClips[4][4], int direction, int currentFrame, SDL_Rect* dstRect, int frameDelay, const int FRAMES_PER_DIRECTION) {
-	//static int currentFrame = 0;
-
+void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect** spriteClips, int numDirections, int direction, int& currentFrame, SDL_Rect* dstRect, int frameDelay, const int framesPerDirection) 
+{
 	static Uint32 lastTime = SDL_GetTicks();
 
 	Uint32 currentTime = SDL_GetTicks();
 	if (currentTime > lastTime + frameDelay) {
-		currentFrame = (currentFrame + 1) % FRAMES_PER_DIRECTION; 
+		currentFrame = (currentFrame + 1) % framesPerDirection;
 		lastTime = currentTime;
 	}
-	
-	SDL_RenderCopy(renderer, texture, &spriteClips[direction][currentFrame], dstRect);
+
+	if (direction >= 0 && direction < numDirections && spriteClips[direction]) {
+		SDL_RenderCopy(renderer, texture, &spriteClips[direction][currentFrame], dstRect);
+	}
 }
 
 
-/*Funkcja dzieląca sprite sheet na klatki*/
-void BitmapHandler::createSpriteClips(SDL_Rect spriteClips[4][4], int frameWidth, int frameHeight, const int FRAMES_PER_DIRECTION) {
-	// Mapowanie kierunków na wiersze sprite sheet
-	int directionMapping[4] = { 3, 2, 1, 0 }; 
 
-	for (int dir = 0; dir < 4; ++dir) { 
-		for (int frame = 0; frame < FRAMES_PER_DIRECTION; ++frame) { 
+/*Funkcja dzieląca sprite sheet na klatki*/
+SDL_Rect** BitmapHandler::createSpriteClips(int numDirections, int framesPerDirection, int frameWidth, int frameHeight, int* directionMapping) 
+{
+	// Alokacja pamięci dla tablicy wskaźników
+	SDL_Rect** spriteClips = new SDL_Rect * [numDirections];
+
+	for (int dir = 0; dir < numDirections; ++dir) {
+		spriteClips[dir] = new SDL_Rect[framesPerDirection];
+
+		int mappedDir = directionMapping ? directionMapping[dir] : dir;
+
+		for (int frame = 0; frame < framesPerDirection; ++frame) {
 			spriteClips[dir][frame].x = frame * frameWidth;
-			spriteClips[dir][frame].y = directionMapping[dir] * frameHeight;
+			spriteClips[dir][frame].y = mappedDir * frameHeight;
 			spriteClips[dir][frame].w = frameWidth;
 			spriteClips[dir][frame].h = frameHeight;
 		}
 	}
+
+	return spriteClips;
 }
 
+/*Funkcja do czyszczenia pamięci*/
+void BitmapHandler::freeSpriteClips(SDL_Rect** spriteClips, int numDirections) {
+	for (int dir = 0; dir < numDirections; ++dir) {
+		delete[] spriteClips[dir];
+	}
+	delete[] spriteClips;
+}
 
 
 /*Zapisywanie bitmapy*/

@@ -15,10 +15,13 @@ public:
 	SDL_Texture *bmpSurface(const char* filePath, SDL_Renderer *renderer, SDL_Rect* pt);
 
 	/*Animowanie sprite'ów*/
-	void animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect spriteClips[4][4], int direction, int currentFrame, SDL_Rect* dstRect, int frameDelay, const int FRAMES_PER_DIRECTION);
+	void animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect** spriteClips, int numDirections, int direction, int& currentFrame, SDL_Rect* dstRect, int frameDelay, const int framesPerDirection);
 
 	/*Funkcja dzieląca sprite sheet na klatki*/
-	void createSpriteClips(SDL_Rect spriteClips[4][4], int frameWidth, int frameHeight, const int FRAMES_PER_DIRECTION);
+	SDL_Rect** createSpriteClips(int numDirections, int framesPerDirection, int frameWidth, int frameHeight, int* directionMapping = nullptr);
+
+	/*Funckja do czyszcenia pamięci*/
+	void freeSpriteClips(SDL_Rect** spriteClips, int numDirections);
 
 	/*Zapisywanie bitmapy do pliku*/
 	int saveSurfaceAsBMP(SDL_Surface* surface, const char* filePath);
