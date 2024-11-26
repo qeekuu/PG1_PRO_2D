@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObject.h"
+#include "BitmapObject.h"
 
-class AnimatedObject : public GameObject
+class AnimatedObject : public BitmapObject
 {
 public:
 	virtual void animate() = 0;

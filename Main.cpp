@@ -13,14 +13,6 @@
 #include "Ellipse.h"
 #include "BitmapHandler.h"
 
-enum Direction {
-	RIGHT = 0,
-	LEFT = 1,
-	UP = 2,
-	DOWN = 3,
-	IDLE = -1 // Bez ruchu
-};
-
 int main(int argc, char* argv[])
 {
 	// pomocnicze
@@ -33,11 +25,6 @@ int main(int argc, char* argv[])
 	Point2D r2(600, 100);
 	Point2D r3(600, 300);
 	Point2D r4(400, 300);
-
-	bool isJumping = false;       // Informacja, czy kwadrat jest w trakcie skoku
-	float velocityY = 0.0f;       // Prêdkoœæ pionowa kwadratu
-	const float gravity = 0.5f;   // Sta³a grawitacji, dostosuj w zale¿noœci od potrzeb
-	const float jumpStrength = -10.0f; // Si³a skoku
 
 		std::vector<Point2D> points =
 		{
@@ -67,6 +54,7 @@ int main(int argc, char* argv[])
 		Player player(255, 0, 0, 255, 390, 290, 410, 290, 410, 310, 390, 310);
 
 		/*bitmap*/
+		/*
 		BitmapHandler handler;
 		const char* path = "D:\\Filip\\PGPRO07.11.24\\rsc\\Bomba.bmp";
 		SDL_Rect rect;
@@ -94,107 +82,17 @@ int main(int argc, char* argv[])
 		const char* savePath2 = "D:\\Filip\\PGPRO07.11.24\\rsc\\output2.bmp";
 		handler.saveSurfaceAsBMP(dstSurface, savePath2);
 		
-		SDL_Rect dstRect = { 200, 200, 32, 32 };
-		const char* spritePath = "D:\\Filip\\PGPRO07.11.24\\rsc\\PLAYER_spritesheet.bmp";
-		SDL_Texture* sprtieSheet = handler.bmpSurface(spritePath, Engine::getInstance()->getRenderer(), &dstRect);
-		
-		// Przygotowanie klatek animacji
-		int spriteSpeed = 5;
-		int direction = IDLE;
-		int frame = 0;
-		int frameDelay = 5;
-		int frameCount = 0;
-		int previousDirection = IDLE;
-
-		int numDirections = 4;
-		int framesPerDirection = 4;
-		int frameWidth = 32;
-		int frameHeight = 32;
-		int directionMapping[4] = { 3, 2, 1, 0 };
-		int currentFrame = 0;
-
-		//SDL_Rect spriteClips[NUM_FRAMES];
-		//handler.createSpriteClips(spriteClips, FRAME_WIDTH, FRAME_HEIGHT, FRAMES_PER_DIRECTION);
-		SDL_Rect** spriteClips = handler.createSpriteClips(numDirections, framesPerDirection, frameWidth, frameHeight, directionMapping);
-		
-
+		*/
 
 	while (Engine::getInstance()->running()==true)
 	{
 		
 		Input::getInstances()->listen();
 
-		// Obs³uga wejœcia u¿ytkownika (poruszanie sprite'em)
-
-		if (Input::getInstances()->getKey(SDL_SCANCODE_W)) {
-			dstRect.y = std::max(0, dstRect.y - spriteSpeed); // Ruch w górê 
-			direction = UP;
-		}
-		if (Input::getInstances()->getKey(SDL_SCANCODE_S)) {
-			dstRect.y = std::min(600 - dstRect.h, dstRect.y + spriteSpeed); // Ruch w dó³
-			direction = DOWN;
-		}
-		if (Input::getInstances()->getKey(SDL_SCANCODE_A)) {
-			dstRect.x = std::max(0, dstRect.x - spriteSpeed); // Ruch w lewo
-			direction = LEFT;
-		}
-		if (Input::getInstances()->getKey(SDL_SCANCODE_D)) {
-			dstRect.x = std::min(800 - dstRect.w, dstRect.x + spriteSpeed); // Ruch w prawo
-			direction = RIGHT;
-		}
-		if (!Input::getInstances()->getKey(SDL_SCANCODE_W) && !Input::getInstances()->getKey(SDL_SCANCODE_S) && !Input::getInstances()->getKey(SDL_SCANCODE_A) && !Input::getInstances()->getKey(SDL_SCANCODE_D)) 
-		{
-			direction = IDLE; // bez ruchu
-		}
-
-		// Resetowanie klatek przy zmianie kierunku
-		if (direction != previousDirection) {
-			frameCount = 0;
-			frame = 0;
-		}
-		previousDirection = direction;
-
-		// Animation logic based on direction
-		if (direction != IDLE) 
-		{
-			frameCount++;
-			if (frameCount >= frameDelay) 
-			{
-				frame = (frame + 1) % framesPerDirection; // Loop through animation frames
-				frameCount = 0;
-			}
-		}
-		else
-		{
-			frame = 0;
-		}
-
-		// Obs³uga skoku
-		if (Input::getInstances()->getKey(SDL_SCANCODE_SPACE) && !isJumping) {
-			isJumping = true;
-			velocityY = jumpStrength;
-		}
-		if (isJumping) {
-			velocityY += gravity; // gawitacja
-			dstRect.y += velocityY;
-
-			if (dstRect.y >= 290) { // powrót na ziemie
-				dstRect.y = 290;
-				isJumping = false;
-				velocityY = 0.0f;
-			}
-		}
-
+		player.update();
 		
 		SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), 255, 255, 255, 255);
 		SDL_RenderClear(Engine::getInstance()->getRenderer());
-
-		// Animacja sprite'a
-		if (direction != IDLE)
-			handler.animateBMPSprite(Engine::getInstance()->getRenderer(), sprtieSheet, spriteClips, numDirections, direction, currentFrame, &dstRect, frameDelay, framesPerDirection);
-			//handler.animateBMPSprite(Engine::getInstance()->getRenderer(), sprtieSheet, spriteClips, direction, frame, &dstRect, frameDelay, FRAMES_PER_DIRECTION);
-		else
-			SDL_RenderCopy(Engine::getInstance()->getRenderer(), sprtieSheet, &spriteClips[DOWN][0], &dstRect);
 
 		if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
 		{
@@ -212,7 +110,7 @@ int main(int argc, char* argv[])
 
 		//PrimitiveRenderer::setWindowColor(255, 255, 255, 255);
 
-		SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
+		//SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
 		//SDL_RenderCopy(Engine::getInstance()->getRenderer(), sprtieSheet, &spriteClips[direction][frame], &dstRect);
 
 
@@ -286,7 +184,7 @@ int main(int argc, char* argv[])
 			scalePoint = true;
 		}*/
 		
-		player.getRect().fill(fillColor,boundaryColor);
+		//player.getRect().fill(fillColor,boundaryColor);
 
 		/* rectangle.fill(fillColor, boundaryColor); */
 		/* circle.fill(fillColor_2,boundaryColor_2); */
@@ -300,10 +198,12 @@ int main(int argc, char* argv[])
 	}
 
 	/*Zwalnianie bitmap*/
+	/*
 	handler.deleteTexture(texture);
 	handler.deleteSurface(newSurface);
 	handler.deleteSurface(dstSurface);
 	handler.freeSpriteClips(spriteClips, numDirections);
+	*/
 
 	Engine::getInstance()->close();
 	return 0;

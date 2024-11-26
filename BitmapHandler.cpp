@@ -57,8 +57,6 @@ void BitmapHandler::animateBMPSprite(SDL_Renderer* renderer, SDL_Texture* textur
 	}
 }
 
-
-
 /*Funkcja dzieląca sprite sheet na klatki*/
 SDL_Rect** BitmapHandler::createSpriteClips(int numDirections, int framesPerDirection, int frameWidth, int frameHeight, int* directionMapping) 
 {

@@ -7,7 +7,7 @@
 #include "SpriteObject.h"
 #include <SDL_stdinc.h>
 
-class Player : public UpdatableObject, public DrawableObject, public TransformableObject
+class Player : public UpdatableObject, public DrawableObject, public TransformableObject, public AnimatedObject
 {
 public:
 	Player(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x1, unsigned int y1,unsigned int x2, unsigned int y2,unsigned int x3, unsigned int y3,unsigned int x4, unsigned int y4);
@@ -15,7 +15,12 @@ public:
 	{
 		return rectangle;
 	}
+
+	~Player();
+
 	void draw() override;
+	void update() override;
+	void animate() override;
 private:
 	Uint8 r, g, b, a;
 	Rectangle rectangle;
@@ -29,9 +34,6 @@ private:
 
 	/* DrawableObject */
 	void fill(SDL_Color fillColor, SDL_Color boundryColor) override;
-	
-	/* UpdatableObject */
-	void update() override;
 
 
 };
