@@ -43,11 +43,11 @@ int main(int argc, char* argv[])
 		Point2D Point(400,300);
 		PrimitiveRenderer pointR;
 		PrimitiveRenderer lineR;
-		//Rectangle rectangle(0, 0, 255, 255, r1.getCoordinates('X'), r1.getCoordinates('Y'), r2.getCoordinates('X'), r2.getCoordinates('Y'), r3.getCoordinates('X'), r3.getCoordinates('Y'), r4.getCoordinates('X'), r4.getCoordinates('Y'));
+		Rectangle rectangle(0, 0, 255, 255, 50, 50, 150, 50, 150, 150, 50, 150);
 		Triangle triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
 		PrimitiveRenderer fillRenderer;
 		PrimitiveRenderer line_p;
-		Circle circle(255, 255, 255, 255, 100, 100, 70);
+		Circle circle(255, 255, 255, 255, 400, 400, 70);
 		Polygon polygon(210, 50, 20, 255, points);
 		LineSegment line(300, 100, 400, 500);
 		Ellipse ellipse(255,0,0,255,400,500,70,40);
@@ -80,12 +80,11 @@ int main(int argc, char* argv[])
 
 	while (Engine::getInstance()->running()==true)
 	{
-		
 		Input::getInstances()->listen();
 
 		player.update();
 		
-		SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(Engine::getInstance()->getRenderer(), 0, 0, 0, 255);
 		SDL_RenderClear(Engine::getInstance()->getRenderer());
 
 		if (Input::getInstances()->getButton(Input::LEFT_BUTTON))
@@ -106,9 +105,9 @@ int main(int argc, char* argv[])
 
 		SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
 
-		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
-		//line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
-		//lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
+		pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
+		line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
+		lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
 		
 		SDL_Color fillColor = PrimitiveRenderer::fillColor(255, 0, 0, 255);
 		SDL_Color boundaryColor = PrimitiveRenderer::boundaryColor(0, 0, 255, 255);
@@ -121,11 +120,11 @@ int main(int argc, char* argv[])
 		SDL_Color fillColor_5 = PrimitiveRenderer::fillColor(76, 140, 10, 255);
 		SDL_Color boundaryColor_5 = PrimitiveRenderer::fillColor(255, 255, 0, 255);
 
-		/* polygon.draw(); */
-		/* triangle.draw(); */
-		/* ellipse.draw(); */
-		/* circle.draw(); */
-		/* rectangle.draw(); */
+		polygon.draw(); 
+		triangle.draw(); 
+		ellipse.draw(); 
+		circle.draw(); 
+		rectangle.draw(); 
 
 		player.draw();
 			
@@ -176,11 +175,11 @@ int main(int argc, char* argv[])
 			scalePoint = true;
 		}*/
 
-		/* rectangle.fill(fillColor, boundaryColor); */
-		/* circle.fill(fillColor_2,boundaryColor_2); */
-		/* polygon.fill(fillColor_3, boundaryColor_3); */
-		/* ellipse.fill(fillColor_4, boundaryColor_4); */
-		/* triangle.fill(fillColor_5,boundaryColor_5); */
+		//rectangle.fill(fillColor, boundaryColor); 
+		//circle.fill(fillColor_2,boundaryColor_2); 
+		//polygon.fill(fillColor_3, boundaryColor_3); 
+		//ellipse.fill(fillColor_4, boundaryColor_4); 
+		//triangle.fill(fillColor_5,boundaryColor_5); 
 		PrimitiveRenderer::render();
 
 		/*Do aktualizacjia ekranu*/

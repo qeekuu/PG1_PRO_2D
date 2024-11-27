@@ -5,7 +5,11 @@
 #include "Input.h"
 #include "Player.h"
 
-bool Engine::Init() 
+/**
+ * @brief Initialize the engine.
+ * @return True if the engine is initialized successfully, false otherwise.
+ */
+bool Engine::Init()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
@@ -28,54 +32,73 @@ bool Engine::Init()
                 std::cerr << "Renderer creation error: " << SDL_GetError() << std::endl;
                 isRunning = false;
             }
-                isRunning = true; 
+            isRunning = true;
         }
     }
     return isRunning;
 }
 
-
-
-Engine* Engine::getInstance() 
+/**
+ * @brief Get the singleton instance of the Engine class.
+ * @return A pointer to the Engine instance.
+ */
+Engine* Engine::getInstance()
 {
-    if (!instance) 
+    if (!instance)
     {
         instance = new Engine;
     }
     return instance;
 }
 
+/**
+ * @brief Get the SDL_Renderer instance used by the engine.
+ * @return A pointer to the SDL_Renderer instance.
+ */
 SDL_Renderer* Engine::getRenderer()
 {
     return renderer;
 }
 
+/**
+ * @brief Check if the engine is currently running.
+ * @return True if the engine is running, false otherwise.
+ */
 bool Engine::running()
 {
     return isRunning;
 }
 
-
-
+/**
+ * @brief Set the running state of the engine.
+ * @param quit The new running state. True to stop the engine, false to keep it running.
+ */
 void Engine::setRunning(bool quit)
 {
     this->isRunning = quit;
 }
 
-
+/**
+ * @brief Update the engine state. This function should be called each frame.
+ */
 void Engine::update()
 {
+    // Update logic can be implemented here
 }
 
-
-
+/**
+ * @brief Get the current window size and print it to the console.
+ */
 void Engine::getWindowSize()
 {
     std::cout << windowW << std::endl << windowH << std::endl;
 }
 
-
-
+/**
+ * @brief Set the window size.
+ * @param wiW The width of the window.
+ * @param wiH The height of the window.
+ */
 void Engine::setWindowSize(int wiW, int wiH)
 {
     this->windowW = wiW;
@@ -83,25 +106,29 @@ void Engine::setWindowSize(int wiW, int wiH)
     SDL_SetWindowSize(window, windowW, windowH);
 }
 
-
-
+/**
+ * @brief Set the window title.
+ * @param title A string representing the new window title.
+ */
 void Engine::setWindowTitle(const char* title)
 {
     this->title = title;
 }
 
-
-
-void Engine::close() 
+/**
+ * @brief Close the engine, release resources, and destroy the singleton instance.
+ */
+void Engine::close()
 {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
-    if (instance) 
+    if (instance)
     {
-       delete instance;
-       instance = nullptr;
+        delete instance;
+        instance = nullptr;
     }
 }
 
-Engine* Engine::instance = nullptr; 
+// Initialize the singleton instance to nullptr
+Engine* Engine::instance = nullptr;
