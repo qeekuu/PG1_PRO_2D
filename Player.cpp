@@ -29,7 +29,7 @@ Player::Player(Uint8 r, Uint8 g, Uint8 b, Uint8 a, unsigned int x1, unsigned int
 {
     direction = IDLE;
     currentFrame = 0;
-    spritePath = "D:\\Filip\\PGPRO07.11.24\\rsc\\PLAYER_spritesheet.bmp";
+    spritePath = "rsc\\PLAYER_spritesheet.bmp";
 
     spriteSheet = bmpSurface(spritePath, Engine::getInstance()->getRenderer(), nullptr); 
 

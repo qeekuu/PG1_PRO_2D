@@ -15,13 +15,13 @@
 
 int main(int argc, char* argv[])
 {
-	/*
+	
 	bool translated = false;
 	bool rotated = false;
 	bool rotatedPoint = false;
 	bool scale = false;
 	bool scalePoint = false;
-	*/
+	
 
 	Point2D r1(400, 100);
 	Point2D r2(600, 100);
@@ -43,13 +43,13 @@ int main(int argc, char* argv[])
 		Point2D Point(400,300);
 		PrimitiveRenderer pointR;
 		PrimitiveRenderer lineR;
-		Rectangle rectangle(0, 0, 255, 255, 50, 50, 150, 50, 150, 150, 50, 150);
+		Rectangle rectangle(0, 0, 255, 255, 50, 400, 150, 400, 150, 500, 50, 500);
 		Triangle triangle(255, 255, 0, 255, 100, 200, 200, 250, 150, 350);
 		PrimitiveRenderer fillRenderer;
 		PrimitiveRenderer line_p;
-		Circle circle(255, 255, 255, 255, 400, 400, 70);
+		Circle circle(255, 255, 255, 255, 540, 540, 50);
 		Polygon polygon(210, 50, 20, 255, points);
-		LineSegment line(300, 100, 400, 500);
+		LineSegment line(400, 100, 450, 300);
 		Ellipse ellipse(255,0,0,255,400,500,70,40);
 
 		// Player
@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
 
 		/*bitmap*/
 		BitmapHandler handler;
-		const char* path = "D:\\Filip\\PGPRO07.11.24\\rsc\\Bomba.bmp";
-		SDL_Rect rect = { 100, 100, 32, 32 };
+		const char* path = "rsc\\Bomba.bmp";
+		SDL_Rect rect = { 30, 30, 32, 32 };
 		SDL_Rect rect2 = { 0, 0, 100, 100 };
 		SDL_Rect rect3 = { 50, 50, 100, 100 };
 
@@ -70,12 +70,12 @@ int main(int argc, char* argv[])
 		//test zapisu - kolorowanie nowej poweirzchni
 		SDL_FillRect(newSurface, nullptr, SDL_MapRGB(newSurface->format, 255, 0, 0));
 
-		const char* savePath = "D:\\Filip\\PGPRO07.11.24\\rsc\\output.bmp";
+		const char* savePath = "rsc\\output.bmp";
 		handler.saveSurfaceAsBMP(newSurface, savePath);
 		
 		handler.copyBitmapSurface(newSurface, &rect2, dstSurface, &rect3);
 		
-		const char* savePath2 = "D:\\Filip\\PGPRO07.11.24\\rsc\\output2.bmp";
+		const char* savePath2 = "rsc\\output2.bmp";
 		handler.saveSurfaceAsBMP(dstSurface, savePath2);
 
 	while (Engine::getInstance()->running()==true)
@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 
 		SDL_RenderCopy(Engine::getInstance()->getRenderer(), texture, nullptr, &rect);
 
-		pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
+		//pointR.draw_point(124, 153, 60, 255, Point.getCoordinates('X'), Point.getCoordinates('Y'));
 		line_p.draw_line(255, 0, 0, 255, 700, 100, 700, 300);
 		lineR.draw_line(255,0,255,255,line.getStart().getCoordinates('X'), line.getStart().getCoordinates('Y'), line.getEnd().getCoordinates('X'), line.getEnd().getCoordinates('Y'));
 		
@@ -175,11 +175,11 @@ int main(int argc, char* argv[])
 			scalePoint = true;
 		}*/
 
-		//rectangle.fill(fillColor, boundaryColor); 
-		//circle.fill(fillColor_2,boundaryColor_2); 
-		//polygon.fill(fillColor_3, boundaryColor_3); 
-		//ellipse.fill(fillColor_4, boundaryColor_4); 
-		//triangle.fill(fillColor_5,boundaryColor_5); 
+		rectangle.fill(fillColor, boundaryColor); 
+		circle.fill(fillColor_2,boundaryColor_2); 
+		polygon.fill(fillColor_3, boundaryColor_3); 
+		ellipse.fill(fillColor_4, boundaryColor_4); 
+		triangle.fill(fillColor_5,boundaryColor_5); 
 		PrimitiveRenderer::render();
 
 		/*Do aktualizacjia ekranu*/

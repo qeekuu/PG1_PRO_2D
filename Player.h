@@ -65,18 +65,14 @@ public:
      */
     void animate() override;
 
-private:
-    Uint8 r, g, b, a; /**< Color components of the player's rectangle. */
-    Rectangle rectangle; /**< Rectangle representing the player. */
-
     /* TransformableObject */
 
-    /**
-     * @brief Translates (moves) the player by a given offset.
-     *
-     * @param tx Offset along the x-axis.
-     * @param ty Offset along the y-axis.
-     */
+  /**
+   * @brief Translates (moves) the player by a given offset.
+   *
+   * @param tx Offset along the x-axis.
+   * @param ty Offset along the y-axis.
+   */
     void translate(int tx, int ty) override;
 
     /**
@@ -120,4 +116,8 @@ private:
      * @param boundryColor Boundary color for the rectangle.
      */
     void fill(SDL_Color fillColor, SDL_Color boundryColor) override;
+
+private:
+    Uint8 r, g, b, a; /**< Color components of the player's rectangle. */
+    Rectangle rectangle; /**< Rectangle representing the player. */
 };

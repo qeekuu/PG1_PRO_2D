@@ -225,7 +225,7 @@ int PrimitiveRenderer::determinant3x3(int mat[3][3])
 
 
 /**
- * @brief Checks if two line segments intersect.
+ * @brief Checks if two line segments intersect, this is a helper function for checking whether the polygon intersects \.
  *
  * This function uses the determinant of 3x3 matrices to calculate the orientation of the
  * points and determine whether two segments intersect.

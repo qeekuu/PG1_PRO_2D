@@ -26,10 +26,7 @@ public:
      */
     void close();
 
-    /**
-     * @brief Update the engine state.
-     */
-    void update();
+ 
 
     /**
      * @brief Check if the engine is currently running.

@@ -79,14 +79,6 @@ void Engine::setRunning(bool quit)
 }
 
 /**
- * @brief Update the engine state. This function should be called each frame.
- */
-void Engine::update()
-{
-    // Update logic can be implemented here
-}
-
-/**
  * @brief Get the current window size and print it to the console.
  */
 void Engine::getWindowSize()
